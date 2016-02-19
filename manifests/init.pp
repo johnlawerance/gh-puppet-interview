@@ -1,16 +1,16 @@
-class gh-puppet-interview {
+package { 'httpd':
+  ensure => installed,
+}
 
-  package { 'httpd':
-    ensure => installed,
-  }
+service { 'httpd':
+  ensure  => "started",
+  require => Package['httpd'],
+}
 
-  service { 'httpd':
-    ensure => "started",
-  }
- 
-  file { '/etc/httpd/conf/httpd.conf':
-    ensure => present,
-    source => 'files/httpd.conf'
-  }
-
+file { '/etc/httpd/conf/httpd.conf':
+  ensure  => present,
+  source  => 'files/httpd.conf'
+  source  => '/home/vagrant/gh-puppet-interview/files/httpd.conf',
+  notify  => Service['httpd'],
+  require => Package['httpd'],
 }
