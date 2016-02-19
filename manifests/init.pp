@@ -9,8 +9,7 @@ service { 'httpd':
 
 file { '/etc/httpd/conf/httpd.conf':
   ensure  => present,
-  source  => 'files/httpd.conf'
-  source  => '/home/vagrant/gh-puppet-interview/files/httpd.conf',
+  source  => '/home/vagrant/gh-puppet-interview/files/httpd.conf'
   notify  => Service['httpd'],
   require => Package['httpd'],
 }
